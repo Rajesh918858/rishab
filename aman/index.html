@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishal | Reality vs Art</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        marker: ['Permanent Marker', 'cursive'],
+                    },
+                    colors: {
+                        'neon-blue': '#00f3ff',
+                        'neon-pink': '#ff00ff',
+                        'neon-yellow': '#eab308',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            background-image: 
+                linear-gradient(to right, #1a1a1a 1px, transparent 1px),
+                linear-gradient(to bottom, #1a1a1a 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+        
+        .text-glow-pink {
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f3ff; }
+
+        .floating { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <header class="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 relative overflow-hidden">
+        <!-- Background Splashes -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-neon-blue rounded-full blur-[150px] opacity-20"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-neon-pink rounded-full blur-[150px] opacity-20"></div>
+
+        <div class="relative z-10 space-y-4">
+            <div class="inline-block border border-neon-blue/30 px-4 py-1 rounded-full bg-black/50 backdrop-blur-md mb-4">
+                <span class="text-neon-blue tracking-widest text-xs font-bold uppercase">Official Gallery</span>
+            </div>
+            
+            <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter mb-2">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-500">VISHAL</span>
+            </h1>
+            
+            <a href="https://instagram.com/vishaaal_1122" target="_blank" class="group flex items-center justify-center gap-2 text-xl hover:text-neon-pink transition-colors duration-300">
+                <i data-lucide="instagram" class="w-6 h-6"></i>
+                <span class="font-light tracking-wide border-b border-transparent group-hover:border-neon-pink">@vishaaal_1122</span>
+            </a>
+
+            <p class="mt-8 text-gray-400 max-w-lg mx-auto text-sm md:text-base">
+                Welcome to my world. On the left is <b class="text-white">Reality</b>. On the right is <b class="text-neon-yellow">Imagination</b>.
+            </p>
+            
+            <div class="mt-10 animate-bounce">
+                <i data-lucide="chevron-down" class="w-8 h-8 text-gray-600"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN GALLERY -->
+    <main class="max-w-7xl mx-auto px-4 pb-32">
+        <div id="gallery-grid" class="space-y-24">
+            <!-- Images will be injected here by Javascript -->
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-gray-800 bg-black/80 backdrop-blur-xl py-20 text-center relative overflow-hidden">
+        <div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+            <h1 class="text-[10rem] font-black text-white">VISHAL</h1>
+        </div>
+        
+        <div class="relative z-10 px-4">
+            <div class="w-16 h-16 bg-gradient-to-br from-neon-blue to-neon-pink rounded-2xl mx-auto mb-8 flex items-center justify-center transform rotate-12 hover:rotate-0 transition-all duration-500">
+                <i data-lucide="heart" class="w-8 h-8 text-white fill-white animate-pulse"></i>
+            </div>
+            
+            <h2 class="text-3xl md:text-5xl font-bold mb-6 font-marker text-glow-pink">Thank You So Much!</h2>
+            <p class="text-gray-400 text-lg mb-8">For visiting my profile and entering my artistic world.</p>
+            
+            <a href="https://instagram.com/vishaaal_1122" class="inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-neon-blue hover:scale-105 transition-all duration-300">
+                <i data-lucide="instagram" class="w-5 h-5"></i>
+                Follow Me
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Total number of images
+        const TOTAL_IMAGES = 9;
+
+        const gallery = document.getElementById('gallery-grid');
+
+        // Generate the 9 rows
+        for (let i = 1; i <= TOTAL_IMAGES; i++) {
+            const row = document.createElement('div');
+            
+            // Layout: Row on desktop, stacked on mobile
+            row.className = "flex flex-col lg:flex-row items-stretch gap-6 lg:gap-12 relative group";
+            
+            row.innerHTML = `
+                <!-- Connector Line (Desktop Only) -->
+                <div class="hidden lg:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+                    <div class="w-12 h-12 bg-black border-2 border-gray-700 rounded-full flex items-center justify-center text-gray-500 font-bold text-xs">
+                        VS
+                    </div>
+                </div>
+
+                <!-- LEFT SIDE: REALITY (Normal Pic) -->
+                <div class="flex-1 glass-card p-2 md:p-4 rounded-3xl transform transition-transform duration-500 hover:scale-[1.02]">
+                    <div class="relative aspect-[4/5] rounded-2xl overflow-hidden">
+                        <div class="absolute top-4 left-4 z-10 bg-black/60 backdrop-blur-md px-3 py-1 rounded-lg border border-white/10">
+                            <span class="text-xs font-bold tracking-widest text-neon-blue uppercase">Reality</span>
+                        </div>
+                        <img src="normal${i}.jpg" alt="Real Vishal ${i}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                    </div>
+                    <div class="mt-4 flex justify-between items-center px-2">
+                        <span class="font-mono text-gray-500 text-sm">0${i} // ORIGINAL</span>
+                        <i data-lucide="camera" class="w-4 h-4 text-gray-600"></i>
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDE: IMAGINATION (Doodle Pic) -->
+                <div class="flex-1 glass-card p-2 md:p-4 rounded-3xl border-neon-pink/30 shadow-[0_0_15px_rgba(255,0,255,0.1)] transform transition-transform duration-500 hover:scale-[1.02]">
+                    <div class="relative aspect-[4/5] rounded-2xl overflow-hidden">
+                        <div class="absolute top-4 right-4 z-10 bg-neon-pink text-black px-3 py-1 rounded-lg font-bold transform rotate-2">
+                            <span class="text-xs tracking-widest font-marker uppercase">Doodle Art</span>
+                        </div>
+                        <img src="img${i}.jpg" alt="Doodle Art ${i}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110 contrast-110">
+                    </div>
+                    <div class="mt-4 flex justify-between items-center px-2">
+                        <span class="font-marker text-neon-pink text-sm tracking-wide">ART VERSION</span>
+                        <i data-lucide="pen-tool" class="w-4 h-4 text-neon-pink"></i>
+                    </div>
+                </div>
+            `;
+            
+            gallery.appendChild(row);
+        }
+
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Simple Intersection Observer for fade-in effect
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-20');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Add animation classes to rows
+        document.querySelectorAll('#gallery-grid > div').forEach((el) => {
+            el.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-20');
+            observer.observe(el);
+        });
+
+    </script>
+</body>
+</html>

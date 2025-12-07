@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishal | Touch to Reveal</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        marker: ['Permanent Marker', 'cursive'],
+                    },
+                    colors: {
+                        'neon-blue': '#00f3ff',
+                        'neon-pink': '#ff00ff',
+                        'neon-yellow': '#eab308',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            background-image: 
+                linear-gradient(to right, #1a1a1a 1px, transparent 1px),
+                linear-gradient(to bottom, #1a1a1a 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: white;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent; /* Removes blue highlight on touch */
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f3ff; }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <header class="min-h-[50vh] flex flex-col items-center justify-center text-center px-4 relative overflow-hidden">
+        <!-- Background Splashes -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-neon-blue rounded-full blur-[150px] opacity-20"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-neon-pink rounded-full blur-[150px] opacity-20"></div>
+
+        <div class="relative z-10 space-y-6">
+            <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-500">VISHAL</span>
+            </h1>
+            
+            <a href="https://instagram.com/vishaaal_1122" target="_blank" class="inline-flex items-center gap-2 text-xl hover:text-neon-pink transition-colors duration-300">
+                <i data-lucide="instagram" class="w-6 h-6"></i>
+                <span class="font-light tracking-wide">@vishaaal_1122</span>
+            </a>
+
+            <div class="mt-8 p-4 border border-neon-blue/30 bg-neon-blue/10 rounded-xl inline-block backdrop-blur-md animate-pulse">
+                <p class="text-neon-blue font-bold text-sm uppercase tracking-widest flex items-center gap-2">
+                    <i data-lucide="touchpad" class="w-4 h-4"></i>
+                    Touch & Hold Image to Reveal Magic
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN GALLERY -->
+    <main class="max-w-6xl mx-auto px-4 pb-32">
+        <!-- Using a Grid Layout for the cards -->
+        <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+            <!-- Images will be injected here by Javascript -->
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-gray-800 bg-black/80 backdrop-blur-xl py-20 text-center relative overflow-hidden">
+        <div class="relative z-10 px-4">
+            <h2 class="text-3xl font-bold mb-6 font-marker text-white">Hope you liked the magic!</h2>
+            <a href="https://instagram.com/vishaaal_1122" class="inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-neon-blue hover:scale-105 transition-all duration-300">
+                <i data-lucide="instagram" class="w-5 h-5"></i>
+                Follow Me
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Total number of images
+        const TOTAL_IMAGES = 9;
+        const gallery = document.getElementById('gallery-grid');
+
+        for (let i = 1; i <= TOTAL_IMAGES; i++) {
+            const card = document.createElement('div');
+            
+            // Set up the card container
+            card.className = "glass-card p-3 rounded-3xl opacity-0 translate-y-20 transition-all duration-700";
+            
+            // The Inner HTML structure for the transformation
+            card.innerHTML = `
+                <div class="group relative aspect-[4/5] w-full rounded-2xl overflow-hidden cursor-pointer touch-manipulation">
+                    
+                    <!-- 1. THE DOODLE IMAGE (Hidden at the back/bottom) -->
+                    <!-- It stays static. When the top image fades out, this becomes visible. -->
+                    <img src="img${i}.jpg" 
+                         alt="Doodle Art ${i}" 
+                         class="absolute inset-0 w-full h-full object-cover">
+                    
+                    <!-- 2. THE NORMAL IMAGE (Visible on top) -->
+                    <!-- It has opacity-100 by default. On hover/active, opacity becomes 0. -->
+                    <img src="normal${i}.jpg" 
+                         alt="Real Vishal ${i}" 
+                         class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out group-hover:opacity-0 group-active:opacity-0 z-10">
+                    
+                    <!-- Labels/Badges -->
+                    <div class="absolute top-4 left-4 z-20 transition-opacity duration-300 group-hover:opacity-0 group-active:opacity-0">
+                        <span class="bg-black/60 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-lg border border-white/20">REALITY</span>
+                    </div>
+                    
+                    <div class="absolute bottom-4 right-4 z-0 opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-500 delay-100">
+                         <span class="bg-neon-pink text-black font-marker text-xs font-bold px-3 py-1 rounded-lg transform rotate-3 inline-block shadow-[4px_4px_0px_rgba(0,0,0,1)]">
+                            DOODLE ART
+                         </span>
+                    </div>
+
+                    <!-- Touch Hint Overlay (Fades out on interaction) -->
+                    <div class="absolute inset-0 bg-black/20 z-20 flex items-center justify-center opacity-0 group-hover:opacity-0 pointer-events-none">
+                        <i data-lucide="fingerprint" class="w-12 h-12 text-white/50"></i>
+                    </div>
+                </div>
+
+                <div class="mt-4 flex justify-between items-center px-2">
+                    <span class="font-mono text-gray-500 text-sm">0${i} // TOUCH TO REVEAL</span>
+                    <i data-lucide="sparkles" class="w-4 h-4 text-neon-yellow"></i>
+                </div>
+            `;
+            
+            gallery.appendChild(card);
+        }
+
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Animation Observer (Fade in on scroll)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.remove('opacity-0', 'translate-y-20');
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('#gallery-grid > div').forEach((el) => {
+            observer.observe(el);
+        });
+
+    </script>
+</body>
+</html>

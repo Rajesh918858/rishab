@@ -1,0 +1,451 @@
+<!-- <!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohit Weds Priyanka | Wedding Invitation</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&family=Rozha+One&display=swap" rel="stylesheet">
+    <!-- Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* --- CSS VARIABLES & THEME --- */
+        :root {
+            --maroon: #800000;
+            --gold: #d4af37;
+            --cream: #fffdd0;
+            --white: #ffffff;
+            --text-dark: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
+            color: var(--maroon);
+        }
+
+        .hindi-font {
+            font-family: 'Rozha One', serif;
+        }
+
+        .cursive {
+            font-family: 'Great Vibes', cursive;
+            color: var(--gold);
+        }
+
+        /* --- HEADER & HERO --- */
+        header {
+            text-align: center;
+            padding: 20px;
+            background: var(--maroon);
+            color: var(--gold);
+        }
+
+        .ganesh-mantra {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1583934555961-0cfa4dd23f93?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: var(--gold);
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .date-display {
+            border: 2px solid var(--gold);
+            padding: 10px 30px;
+            margin-top: 20px;
+            font-size: 1.5rem;
+            background: rgba(0,0,0,0.5);
+            border-radius: 50px;
+        }
+
+        /* --- COUPLE SECTION --- */
+        .couple-section {
+            padding: 60px 20px;
+            text-align: center;
+            background: white;
+        }
+
+        .couple-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .person {
+            max-width: 300px;
+        }
+
+        .photo-frame {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 5px solid var(--gold);
+            overflow: hidden;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .name {
+            font-size: 2rem;
+            color: var(--maroon);
+            font-weight: bold;
+        }
+
+        .parents {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .separator {
+            font-size: 3rem;
+            color: var(--gold);
+            font-family: 'Great Vibes', cursive;
+        }
+
+        /* --- EVENTS TIMELINE --- */
+        .events-section {
+            padding: 60px 20px;
+            background-color: #fff8f0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '✻';
+            display: block;
+            color: var(--gold);
+            font-size: 2rem;
+            margin-top: 10px;
+        }
+
+        .event-card {
+            background: white;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column; /* Mobile default */
+            border-left: 5px solid var(--maroon);
+        }
+
+        .event-date {
+            background: var(--maroon);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            min-width: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .event-date span {
+            display: block;
+        }
+
+        .day { font-size: 2.5rem; font-weight: bold; }
+        .month { font-size: 1.2rem; text-transform: uppercase; }
+
+        .event-details {
+            padding: 25px;
+            flex-grow: 1;
+        }
+
+        .event-details h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--maroon);
+        }
+
+        .event-time, .event-location {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- FAMILY & QUOTE --- */
+        .family-section {
+            padding: 60px 20px;
+            text-align: center;
+            background: var(--maroon);
+            color: white;
+        }
+
+        .family-section h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .kids-quote {
+            margin: 30px auto;
+            padding: 20px;
+            border: 2px dashed var(--gold);
+            display: inline-block;
+            border-radius: 10px;
+            font-style: italic;
+        }
+
+        /* --- COUNTDOWN --- */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            color: white;
+        }
+
+        .time-box {
+            text-align: center;
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 5px;
+            min-width: 70px;
+        }
+
+        .time-val { font-size: 2rem; font-weight: bold; }
+        .time-label { font-size: 0.8rem; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #1a1a1a;
+            color: #888;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* --- MEDIA QUERIES --- */
+        @media (min-width: 768px) {
+            .event-card {
+                flex-direction: row;
+            }
+            .hero h1 {
+                font-size: 6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with Mantra -->
+    <header>
+        <div class="ganesh-mantra hindi-font">|| श्री गणेशाय नमः ||</div>
+        <p class="hindi-font">मंगलम् भगवान विष्णुः मंगलम् गरुड़ध्वजः।<br>मंगलम् पुण्डरीकाक्षः मंगलाय तनोहरिः॥</p>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <p class="cursive" data-aos="fade-down">Save The Date</p>
+        <h1 class="cursive" data-aos="zoom-in">Rohit & Priyanka</h1>
+        <p data-aos="fade-up">We are getting married</p>
+        <div class="date-display" data-aos="fade-up">24 November 2025</div>
+        
+        <!-- Countdown Timer -->
+        <div class="countdown" id="countdown">
+            <div class="time-box"><div class="time-val" id="days">00</div><div class="time-label">Days</div></div>
+            <div class="time-box"><div class="time-val" id="hours">00</div><div class="time-label">Hours</div></div>
+            <div class="time-box"><div class="time-val" id="minutes">00</div><div class="time-label">Mins</div></div>
+            <div class="time-box"><div class="time-val" id="seconds">00</div><div class="time-label">Secs</div></div>
+        </div>
+    </section>
+
+    <!-- Couple Section -->
+    <section class="couple-section">
+        <h2 class="section-title hindi-font">शुभ विवाह</h2>
+        <div class="couple-container">
+            <!-- Groom -->
+            <div class="person" data-aos="fade-right">
+                <div class="photo-frame">
+                    <!-- Update filename here if needed -->
+                    <img src="WhatsApp Image 2025-12-05 at 13.26.12_f560619b.jpg" alt="Rohit Pandit">
+                </div>
+                <div class="name hindi-font">Chi. Rohit Pandit</div>
+                <div class="parents">
+                    S/o Sri Teklal Pandit & Smt. Vimla Devi<br>
+                    <small>Vill: Baghanal, Dist: Giridih (Jharkhand)</small>
+                </div>
+            </div>
+
+            <div class="separator">&</div>
+
+            <!-- Bride -->
+            <div class="person" data-aos="fade-left">
+                <div class="photo-frame">
+                    <!-- Update filename here if needed -->
+                    <img src="WhatsApp Image 2025-12-05 at 13.26.12_4dbad140.jpg" alt="Kumari Priyanka">
+                </div>
+                <div class="name hindi-font">Aayu. Kumari Priyanka</div>
+                <div class="parents">
+                    D/o Sri Vinod Pandit & Smt. Pramila Devi<br>
+                    <small>Vill: Bekobar, Dist: Koderma (Jharkhand)</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events-section">
+        <h2 class="section-title hindi-font">वैवाहिक कार्यक्रम</h2>
+
+        <!-- Haldi -->
+        <div class="event-card" data-aos="fade-up">
+            <div class="event-date">
+                <span class="day">24</span>
+                <span class="month">Nov 2025</span>
+                <span>Monday</span>
+            </div>
+            <div class="event-details">
+                <h3 class="hindi-font">शुभ लगन & हल्दी लेपन</h3>
+                <div class="event-time">🕒 Morning onwards</div>
+                <div class="event-location">📍 Groom's Residence (Baghanal)</div>
+                <p>A joyous beginning with turmeric and blessings.</p>
+            </div>
+        </div>
+
+        <!-- Wedding -->
+        <div class="event-card" data-aos="fade-up">
+            <div class="event-date">
+                <span class="day">24</span>
+                <span class="month">Nov 2025</span>
+                <span>Monday</span>
+            </div>
+            <div class="event-details">
+                <h3 class="hindi-font">बरात प्रस्थान & शुभ विवाह</h3>
+                <div class="event-time">🕒 Baraat Departure: 8:00 PM</div>
+                <div class="event-location">📍 Shiv Mandir, Bekobar Dhogo Pahari</div>
+                <p>Baraat will depart from Baghanal to Bekobar. Wedding ceremony at Mandir Prangan.</p>
+            </div>
+        </div>
+
+        <!-- Reception -->
+        <div class="event-card" data-aos="fade-up">
+            <div class="event-date">
+                <span class="day">26</span>
+                <span class="month">Nov 2025</span>
+                <span>Wednesday</span>
+            </div>
+            <div class="event-details">
+                <h3 class="hindi-font">प्रीतिभोज (Reception)</h3>
+                <div class="event-time">🕒 12:00 PM Onwards</div>
+                <div class="event-location">📍 At Groom's Residence (Baghanal)</div>
+                <p>Please grace us with your presence and bless the couple.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Family & RSVP -->
+    <section class="family-section">
+        <div class="container">
+            <h3 class="hindi-font">दर्शनाभिलाषी</h3>
+            <p style="max-width: 600px; margin: 0 auto; line-height: 1.8;">
+                Sri Jagdish Pandit, Sachin Pandit, Yamuna Pandit, Hari Pandit, <br>
+                Doman Pandit, Vishnu Pandit, Brijnandan <br>
+                & All Pandit Family.
+            </p>
+
+            <div class="kids-quote hindi-font" data-aos="zoom-in">
+                "नन्हें-नन्हें पाँव हमारे कैसे आयें बुलाने को,<br>
+                मेरे मामा की शादी में भूल न जाना आने को..."<br>
+                <strong>- Sonali, Abhiraj</strong>
+            </div>
+            <br>
+            <button onclick="window.print()" style="padding: 10px 20px; background: var(--gold); border: none; border-radius: 5px; cursor: pointer; color: black; font-weight: bold; margin-top: 20px;">
+                Download Invitation / Print
+            </button>
+        </div>
+    </section>
+
+    <footer>
+        <p>Made with ❤️ for Rohit & Priyanka's Wedding</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Animations
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Countdown Timer Logic
+        const weddingDate = new Date("Nov 24, 2025 20:00:00").getTime();
+
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "<h2>The Big Day is Here!</h2>";
+            }
+        }, 1000);
+    </script>
+</body>
+</html> 

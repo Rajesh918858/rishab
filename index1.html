@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>जनमदिन मुबारक सूरज!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #8e44ad; /* Royal Purple */
+            --accent: #f1c40f;  /* Gold */
+            --dark: #0f0c29;
+            --light: #ecf0f1;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* Updated font to Poppins for better Hindi support */
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .highlight {
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(241, 196, 15, 0.5);
+        }
+
+        /* --- HERO SECTION --- */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            font-size: 3.5rem; /* Adjusted slightly for Hindi text width */
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease forwards 0.5s;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #bdc3c7;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease forwards 0.8s;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        /* --- GALLERY SECTION --- */
+        .gallery-section {
+            padding: 4rem 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0; /* For scroll animation */
+            transform: translateY(50px);
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(142, 68, 173, 0.4);
+        }
+
+        .card img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-caption {
+            padding: 1rem;
+            text-align: center;
+            font-style: italic;
+            color: #bdc3c7;
+            font-size: 1rem;
+        }
+
+        /* --- MESSAGE SECTION --- */
+        .message-section {
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .wish-box {
+            background: var(--glass);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid var(--accent);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .wish-box p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .signature {
+            font-family: 'Brush Script MT', cursive; /* Kept signature distinctive */
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0,0,0,0.3);
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .card img { height: 350px; }
+        }
+
+        /* Confetti Canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="confetti-canvas"></canvas>
+
+    <header>
+        <h1 class="hero-title">जनमदिन मुबारक <span class="highlight">सूरज!</span></h1>
+        <p class="hero-subtitle">आज तेरा दिन है भाई! 🚀</p>
+        <div class="scroll-down" onclick="scrollToGallery()">
+            &#x2193;
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="gallery-section" id="gallery">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">अपना भाई, अपना स्वैग</h2>
+            <div class="gallery-grid">
+                <div class="card">
+                    <img src="img1.jpg" alt="Suraj Style">
+                    <div class="card-caption">"स्टाइल वो है जो बिना बोले बता दे कि आप कौन हैं।"</div>
+                </div>
+                <div class="card">
+                    <img src="img2.jpg" alt="Suraj Close Up">
+                    <div class="card-caption">असली हीरो वाली बात ✨</div>
+                </div>
+                <div class="card">
+                    <img src="img3.jpg" alt="Squad">
+                    <div class="card-caption">मस्त पल और पागल दोस्त।</div>
+                </div>
+                <div class="card">
+                    <img src="img4.jpg" alt="Memories">
+                    <div class="card-caption">यादें बना रहे हैं, बातें नहीं। 📸</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="message-section">
+            <div class="wish-box">
+                <h3>मेरे भाई सूरज के लिए,</h3>
+                <br>
+                <p>
+                    ✨ जनमदिन बहुत-बहुत मुबारक सूरज! ✨
+                    <br>
+                    दुआ है कि ये साल तुम्हारे लिए ढेर सारी खुशियां और कामयाबी लेकर आए।
+                    पढ़ाई में तुम्हारी सारी मेहनत रंग लाए और तुम खूब तरक्की करो।
+                </p>
+                <p>
+                    बस ऐसे ही चमकते रहो, बिल्कुल अपने नाम 'सूरज' की तरह, जो सबको रोशनी देता है।
+                    आज का दिन मजे से जियो और हमेशा ऐसे ही आगे बढ़ते रहो।
+                    <br>
+                    आने वाला साल जबरदस्त हो भाई! 🎉🔥
+                </p>
+                <div class="signature">- तुम्हारा दोस्त</div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>दिल ❤️ से बनाया तुम्हारे दोस्त ने | 2025</p>
+    </footer>
+
+    <script>
+        // Smooth Scroll
+        function scrollToGallery() {
+            document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Scroll Animation (Intersection Observer)
+        const cards = document.querySelectorAll('.card');
+        
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        cards.forEach(card => {
+            observer.observe(card);
+        });
+
+        // Simple Confetti Logic
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const confettiParticles = [];
+        const colors = ['#f1c40f', '#e74c3c', '#8e44ad', '#3498db', '#2ecc71'];
+
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                confettiParticles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    size: Math.random() * 10 + 5,
+                    speedY: Math.random() * 3 + 2,
+                    speedX: Math.random() * 2 - 1
+                });
+            }
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            confettiParticles.forEach((p, index) => {
+                p.y += p.speedY;
+                p.x += p.speedX;
+                ctx.fillStyle = p.color;
+                ctx.fillRect(p.x, p.y, p.size, p.size);
+
+                if (p.y > canvas.height) {
+                    confettiParticles.splice(index, 1);
+                }
+            });
+            requestAnimationFrame(animateConfetti);
+        }
+
+        // Trigger confetti on load
+        createConfetti();
+        animateConfetti();
+        
+        // Keep adding confetti periodically
+        setInterval(createConfetti, 3000);
+
+        // Resize fix
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
